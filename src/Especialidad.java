@@ -1,28 +1,26 @@
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Especialidad {
-    private String nombreEspecialidad;
+    private String NombreEspecialidad;
     private String descripcion;
     private List<String> asignaturas;
     private int duracionSemestres;
 
-    // Constructor
     public Especialidad(String nombre, String descripcion, List<String> asignaturas, int duracionSemestres) {
-        this.nombreEspecialidad = nombre;
+        this.NombreEspecialidad = nombre;
         this.descripcion = descripcion;
         this.asignaturas = asignaturas;
         this.duracionSemestres = duracionSemestres;
     }
 
-    // Getters y Setters
     public String getNombre() {
-        return nombreEspecialidad;
+        return NombreEspecialidad;
     }
 
     public void setNombre(String nombre) {
-        this.nombreEspecialidad = nombre;
+        this.NombreEspecialidad = nombre;
     }
 
     public String getDescripcion() {
@@ -49,14 +47,26 @@ public class Especialidad {
         this.duracionSemestres = duracionSemestres;
     }
 
-    // Metodo para agregar una asignatura a la especialidad
     public void agregarAsignatura(String asignatura) {
         this.asignaturas.add(asignatura);
     }
 
-    // Metodo para mostrar información de la especialidad
+    @Override
+    public String toString() {
+        return "Especialidad{" +
+                "\nNombreEspecialidad='" + NombreEspecialidad  +
+                "\ndescripcion='" + descripcion +
+                "\nasignaturas=" + asignaturas +
+                "\nduracionSemestres=" + duracionSemestres ;
+    }
+
+    public static List<Especialidad> crearEspecialidadesEjemplo() {
+        List<Especialidad> especialidades = new ArrayList<>();
+        return especialidades;
+    }
+
     public void mostrarInformacion() {
-        System.out.println("Especialidad: " + nombreEspecialidad);
+        System.out.println("Especialidad: " + NombreEspecialidad);
         System.out.println("Descripción: " + descripcion);
         System.out.println("Duración en semestres: " + duracionSemestres);
         System.out.println("Asignaturas:");
@@ -64,29 +74,7 @@ public class Especialidad {
             System.out.println("- " + asignatura);
         }
     }
-
-    // Sobreescritura del metodo toString para mostrar la información de la especialidad
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Especialidad: ").append(nombreEspecialidad).append("\n")
-                .append("Descripción: ").append(descripcion).append("\n")
-                .append("Duración en semestres: ").append(duracionSemestres).append("\n")
-                .append("Asignaturas: ");
-
-        if (asignaturas.isEmpty()) {
-            sb.append("No hay asignaturas registradas.");
-        } else {
-            for (String asignatura : asignaturas) {
-                sb.append("\n- ").append(asignatura);
-            }
-        }
-
-        return sb.toString();
-    }
-
-    // Metodo estático para agregar una especialidad
-    public static Especialidad agregarEspecialidad(Scanner scanner) {
+    public static void agregarEspecialidad(List<Especialidad> especialidades, Scanner scanner) {
         System.out.println("\n--- Agregar Especialidad ---");
         System.out.print("Nombre: ");
         String nombre = scanner.nextLine();
@@ -94,9 +82,19 @@ public class Especialidad {
         String descripcion = scanner.nextLine();
         System.out.print("Duración (semestres): ");
         int duracion = scanner.nextInt();
-        scanner.nextLine(); // Consumir salto de línea
+        scanner.nextLine(); // Consumir salto
+        especialidades.add(new Especialidad(nombre, descripcion, new ArrayList<>(), duracion));
+        System.out.println("Especialidad agregada exitosamente.");
+    }
 
-        // Crear y devolver la nueva especialidad
-        return new Especialidad(nombre, descripcion, new ArrayList<>(), duracion);
+    public static void mostrarEspecialidades(List<Especialidad> especialidades) {
+        if (especialidades.isEmpty()) {
+            System.out.println("No hay especialidades disponibles.");
+        } else {
+            System.out.println("\n--- Lista de Especialidades ---");
+            for (Especialidad especialidad : especialidades) {
+                System.out.println(especialidad);
+            }
+        }
     }
 }
