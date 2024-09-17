@@ -75,4 +75,11 @@ public class Alumno {
         System.out.println("Carrera: " + carrera);
         System.out.println("Correo Institucional: " + correoInstitucional);
     }
+
+    // tostring
+    @Override
+    public String toString() {
+        return "Número de Control: " + numeroControl + ", Nombre: " + nombre + ", Edad: " + edad +
+                ", Promedio: " + promedio + ", Carrera: " + carrera + ", CorreoInstitcional: " + correoInstitucional;
+    }
 }
