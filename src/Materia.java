@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Materia {
     private String nombre;
@@ -7,6 +8,7 @@ public class Materia {
     private String modalidad;
     private String horario;
     private static List<Materia> materias = new ArrayList<>();
+    private List<Grupo> grupos = new ArrayList<>();
 
 
     public Materia(String nombre, String profesor, String modalidad, String horario) {
@@ -47,14 +49,17 @@ public class Materia {
     @Override
     public String toString() {
         return "Materia{" +
-                "nombre='" + nombre + '\'' +
-                ", profesor='" + profesor + '\'' +
-                ", modalidad='" + modalidad + '\'' +
-                ", horario='" + horario + '\'' +
-                '}';
+                "\nnombre='" + nombre +
+                "\nprofesor='" + profesor +
+                "\nmodalidad='" + modalidad +
+                "\nhorario='" + horario ;
     }
 
     public void mostrarDetalles() {
+        System.out.println("Materia: " + nombre);
+        System.out.println("Profesor: " + profesor);
+        System.out.println("Modalidad: " + modalidad);
+        System.out.println("Horario: " + horario);
 
     }
 
@@ -67,16 +72,33 @@ public class Materia {
         materias.add(new Materia("Programación", "Senén Juarez Tinoco", "Presencial", "12:00 - 1:00 PM"));
         return materias;
     }
-    public static void agregarMateria(String nombre, String profesor, String modalidad, String horario) {
-        Materia nuevaMateria = new Materia(nombre, profesor, modalidad, horario);
-        materias.add(nuevaMateria);
-        System.out.println("Materia agregada exitosamente: " + nombre);
+    public static void agregarMateria(List<Materia> materias, Scanner scanner) {
+        System.out.println("\n--- Agregar Materia ---");
+        System.out.print("Nombre: ");
+        String nombre = scanner.nextLine();
+        System.out.print("Profesor: ");
+        String profesor = scanner.nextLine();
+        System.out.print("Modalidad: ");
+        String modalidad = scanner.nextLine();
+        System.out.print("Horario: ");
+        String horario = scanner.nextLine();
+        materias.add(new Materia(nombre, profesor, modalidad, horario));
+        System.out.println("Materia agregada exitosamente.");
     }
-
-    public static void mostrarMaterias() {
-        for (Materia materia : materias) {
-            materia.mostrarDetalles();
+    public static void mostrarMaterias(List<Materia> materias) {
+        if (materias.isEmpty()) {
+            System.out.println("No hay materias disponibles.");
+        } else {
+            System.out.println("\n--- Lista de Materias ---");
+            for (Materia materia : materias) {
+                System.out.println(materia);
+            }
         }
     }
+    public void agregarGrupo(Grupo grupo) {
+        grupos.add(grupo);
+        grupo.getMaterias().add(this);
+    }
+
 
 }
