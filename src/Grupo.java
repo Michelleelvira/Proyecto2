@@ -40,10 +40,9 @@ public class Grupo {
     @Override
     public String toString() {
         return "Grupo{" +
-                "nombre='" + nombre + '\'' +
-                ", nivel='" + nivel + '\'' +
-                ", materias=" + materias +
-                '}';
+                "\nnombre='" + nombre +
+                "\nnivel='" + nivel +
+                "\nmaterias=" + materias ;
     }
 
     public void mostrarDetalles() {
